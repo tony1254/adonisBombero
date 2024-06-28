@@ -1,12 +1,15 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
+//agrego modelo USUARIO
+import User from '#models/user'
+
 export default class UsersController {
   /**
    * Display a list of resource
    */
   async index({}: HttpContext) {
-
-    return "hola";
+//De esta manera se muestran todos los usuarios
+    return await User.all();
   }
 
   /**
@@ -22,12 +25,23 @@ export default class UsersController {
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) {}
+  async show({ params }: HttpContext) {
+   // return params.id;
+    //para ver SOLO UNO
+    const user = await User.find(params.id)
+    // SQL: SELECT * from "users" WHERE "id" = 1 LIMIT 1;
+    return user;
+  }
 
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params }: HttpContext) {
+     //para ver SOLO UNO
+     const user = await User.find(params.id)
+     // SQL: SELECT * from "users" WHERE "id" = 1 LIMIT 1;
+     return user;
+  }
 
   /**
    * Handle form submission for the edit action
